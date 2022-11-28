@@ -1,22 +1,30 @@
 package Boulangerie;
 
 public class Inventaire {
-	public static Produit[] tabProduit = new Produit[3];
+	public static Produit[] tabProduit = new Produit[10];
 	
 	public Inventaire() {
+		initialisation();
+		}
+		
+	private void initialisation() {
 		Produit baguette = new Produit("baguette",0,1);
 		Produit painChocolat = new Produit("pain au chocolat",0,1);
 		Produit croissant = new Produit("croissant",0,1);
-		
-		tabProduit[0]=baguette;
-		tabProduit[1]=painChocolat;
-		tabProduit[2]=croissant;
+		Produit[] init = new Produit[]{baguette, painChocolat, croissant};
+		for (int i=0;i<3;i++) {
+			tabProduit[i]=init[i];
+		}
 	}
 	
 	public static void main(String[] args) {
-		Produit baguette = new Produit("baguette",0,1);
-		Inventaire invent = new Inventaire();
-		System.out.println(tabProduit[0].getNom());
+		Inventaire inventaire = new Inventaire();
+		System.out.println(tabProduit[2].getNom());
+		
+		Produit sucette = new Produit("sucette",0,1);
+		tabProduit[3]= sucette;
+		System.out.println(tabProduit[3].getNom());
+
 		
 	}
 	
