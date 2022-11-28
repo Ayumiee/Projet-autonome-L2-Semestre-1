@@ -24,8 +24,7 @@ public class Inventaire {
 		Produit sucette = new Produit("sucette",0,1);
 		tabProduit[3]= sucette;
 		System.out.println(tabProduit[3].getNom());
-
-		
+		//test
 	}
 	
 //	public int nbBaguette =1;
