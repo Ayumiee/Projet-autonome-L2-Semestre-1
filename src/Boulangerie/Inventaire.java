@@ -5,20 +5,25 @@ public class Inventaire {
 	public static Produit[] tabProduit;
 	
 	public Inventaire() {
-		this.nbProduit = 3;
-		tabProduit = new Produit[10];
-		initialisation();
-		}
 		
-	private void initialisation() {
 		Produit baguette = new Produit("baguette",0,1);
 		Produit painChocolat = new Produit("pain au chocolat",0,1);
 		Produit croissant = new Produit("croissant",0,1);
-		Produit[] init = new Produit[]{baguette, painChocolat, croissant};
-		for (int i=0;i<3;i++) {
-			tabProduit[i]=init[i];
+		tabProduit= new Produit[]{baguette, painChocolat, croissant, null, null, null, null, null, null, null};
+		this.nbProduit = 3;
+		//initialisation();
 		}
-	}
+		
+//	private void initialisation() {
+//		Produit baguette = new Produit("baguette",0,1);
+//		Produit painChocolat = new Produit("pain au chocolat",0,1);
+//		Produit croissant = new Produit("croissant",0,1);
+//		
+//		Produit[] init = new Produit[]{baguette, painChocolat, croissant};
+//		for (int i=0;i<3;i++) {
+//			tabProduit[i]=init[i];
+//		}
+//	}
 	
 	public static void main(String[] args) {
 		Inventaire inventaire = new Inventaire();
