@@ -1,11 +1,12 @@
 package Boulangerie;
 
 public class Inventaire {
-	protected int effectifInventaire;
-	public static Produit[] tabProduit = new Produit[10];
+	protected int nbProduit;
+	public static Produit[] tabProduit;
 	
 	public Inventaire() {
-		this.effectifInventaire = 3;
+		this.nbProduit = 3;
+		tabProduit = new Produit[10];
 		initialisation();
 		}
 		
