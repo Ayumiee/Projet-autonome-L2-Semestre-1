@@ -23,6 +23,14 @@ public class Produit {
 		return prix;
 	}
 
+	public void reduireQuantitee(int nbSouhaite) {
+		this.nombre= nombre-nbSouhaite;
+		if (nombre==0) {
+			//appeller le boulanger
+		}
+		
+	}
+
 	
 	
 }
