@@ -39,8 +39,7 @@ public class Main {
 
         try {
         	int num_produit = Integer.parseInt(inputOutput("Que-souhaitez-vous achetez : \n -> 0 - Baguette \n -> 1 - Pain au chocolat \n -> 2 - Croissant \n"));
-        	
-        	
+
         	if (num_produit>=0 && num_produit<3) {
         		int nb_restant = Machine.getInventaire().getTabProduit()[num_produit].getNombre();
         		
@@ -50,8 +49,7 @@ public class Main {
         			if (nb_souhaite>0 && nb_souhaite<=nb_restant) {
         			
         				int argent = Integer.parseInt(inputOutput("Veuillez insérer la monnaie"));
-        				//achat(num_produit,argent,nb_souhaite);
-        				System.out.println(num_produit+" "+argent);
+        					distributeur.acheter(num_produit,argent,nb_souhaite);
         			}	
         		} 
         		else {
@@ -68,10 +66,15 @@ public class Main {
 			System.out.println("Veuillez rentrer un chiffre");
 			Menu_client();
 		}
-        
-        
-        
 	}
+        
+        
+	private int demanderProduitDesiree() {
+        	return Integer.parseInt(inputOutput("Que-souhaitez-vous achetez : \n -> 0 - Baguette \n -> 1 - Pain au chocolat \n -> 2 - Croissant \n"));
+        }
+        
+        
+
 	
 	public static void Menu_boulanger() {
 		int action = Integer.parseInt(inputOutput("Que souhaitez-vous faire ?\n1 - Ajouter produit \n2 - Récupérer argent\n "));

@@ -11,9 +11,9 @@ public class Inventaire {
 		
 	
 	private void initialisation() {
-		Produit baguette = new Produit("baguette",0,1);
-		Produit painChocolat = new Produit("pain au chocolat",0,1);
-		Produit croissant = new Produit("croissant",0,1);
+		Produit baguette = new Produit("baguette",3,1);
+		Produit painChocolat = new Produit("pain au chocolat",3,1);
+		Produit croissant = new Produit("croissant",3,1);
 		tabProduit= new Produit[]{baguette, painChocolat, croissant, null, null, null, null, null, null, null};
 		this.nbProduit = 3;
 	
@@ -26,16 +26,21 @@ public class Inventaire {
 		Produit sucette = new Produit("sucette",0,1);
 		tabProduit[3]= sucette;
 		System.out.println(tabProduit[3].getNom());
+		System.out.println(numeroChoisisVersProduit(0));
+		
 
 	}
 
+	public static Produit numeroChoisisVersProduit(int produit) {
+		return getTabProduit()[produit];
+	}
 
 	public int getNbProduit() {
 		return nbProduit;
 	}
 
 
-	public Produit[] getTabProduit() {
+	public static Produit[] getTabProduit() {
 		return tabProduit;
 	}
 	
