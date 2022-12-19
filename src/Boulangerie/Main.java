@@ -12,13 +12,18 @@ import java.io.InputStreamReader;
 //int num_produit = utilisateur.nextInt();
 
 public class Main {
-	private static Machine distributeur;
+	private Machine distributeur;
+	
+	public Main() {
+		distributeur = new Machine();
+	}
 	
 	public static void Start() {
+		Machine distributeur = new Machine();
 		try {
 		int choixMenu = Integer.parseInt(inputOutput("0 - Achat \n1 - Maintenance"));
 		if (choixMenu==0) {
-			Menu_client(); }
+			Menu_client(distributeur); }
 		
 		else{
 			if (choixMenu==1) {
@@ -35,13 +40,13 @@ public class Main {
 		
 	}
 	
-	public static void Menu_client() {
-
+	public static void Menu_client(Machine distributeur) {
         try {
         	int num_produit = Integer.parseInt(inputOutput("Que-souhaitez-vous achetez : \n -> 0 - Baguette \n -> 1 - Pain au chocolat \n -> 2 - Croissant \n"));
 
         	if (num_produit>=0 && num_produit<3) {
-        		int nb_restant = Machine.getInventaire().getTabProduit()[num_produit].getNombre();
+        		Machine.getInventaire();
+				int nb_restant = Inventaire.getTabProduit()[num_produit].getNombre();
         		
         		if (nb_restant >0) {
         		int nb_souhaite = Integer.parseInt(inputOutput("Combien en souhaitez-vous ? Il en reste : "+ nb_restant ));
@@ -49,22 +54,22 @@ public class Main {
         			if (nb_souhaite>0 && nb_souhaite<=nb_restant) {
         			
         				int argent = Integer.parseInt(inputOutput("Veuillez insérer la monnaie"));
-        					distributeur.acheter(num_produit,argent,nb_souhaite);
+        					distributeur.acheter(num_produit,argent,nb_souhaite,distributeur);
         			}	
         		} 
         		else {
         			System.out.println("Il n'y en a plus ");
-    				Menu_client();
+    				Menu_client(distributeur);
         		}
         	} 
         	else {
 				System.out.println("Numéro invalide");
-				Menu_client();
+				Menu_client(distributeur);
 				}	
 			} 
         catch (NumberFormatException e ) {
 			System.out.println("Veuillez rentrer un chiffre");
-			Menu_client();
+			Menu_client(distributeur);
 		}
 	}
         
@@ -73,8 +78,6 @@ public class Main {
         	return Integer.parseInt(inputOutput("Que-souhaitez-vous achetez : \n -> 0 - Baguette \n -> 1 - Pain au chocolat \n -> 2 - Croissant \n"));
         }
         
-        
-
 	
 	public static void Menu_boulanger() {
 		int action = Integer.parseInt(inputOutput("Que souhaitez-vous faire ?\n1 - Ajouter produit \n2 - Récupérer argent\n "));
@@ -99,7 +102,6 @@ public class Main {
 	public static void main(String[] args) {
 		System.out.println("Bienvenue !");
 		//new boulanger 
-		Machine distributeur = new Machine();
 		//Inventaire inventaire = distributeur.getInventaire();
 		Start();
 	}

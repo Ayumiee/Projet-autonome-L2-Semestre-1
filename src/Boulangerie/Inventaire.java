@@ -8,15 +8,13 @@ public class Inventaire {
 		this.nbProduit = 3;
 		initialisation();
 		}
-		
-	
+
 	private void initialisation() {
 		Produit baguette = new Produit("baguette",3,1);
 		Produit painChocolat = new Produit("pain au chocolat",3,1);
 		Produit croissant = new Produit("croissant",3,1);
 		tabProduit= new Produit[]{baguette, painChocolat, croissant, null, null, null, null, null, null, null};
 		this.nbProduit = 3;
-	
 	}
 	
 	public static void main(String[] args) {
@@ -35,7 +33,7 @@ public class Inventaire {
 		return getTabProduit()[produit];
 	}
 
-	public int getNbProduit() {
+	public int getNbProduitTotaux() {
 		return nbProduit;
 	}
 
