@@ -16,21 +16,17 @@ public class Machine {
 		
 		Produit produitDemande = Inventaire.numeroChoisisVersProduit(produit);
 		int prix = produitDemande.getPrix() * nbSouhaite;
-		
-		if (produitSuffisant(produitDemande, nbSouhaite)) {
-			if (verifierArgentSuffisant(argent, prix)) {
-				lancerTransaction(produitDemande, argent, nbSouhaite, prix); //monnaie a utiliser par la suite
-				System.out.println("Transaction acceptée !");
-			}else {
-				AnnulerTransaction(argent, "Argent insuffisant" , distributeur);
-				}
-		} else {
-		AnnulerTransaction(argent, "Nombre souhaité indisponible" , distributeur);
-		}
-	}
 
+		if (verifierArgentSuffisant(argent, prix)) {
+			lancerTransaction(produitDemande, argent, nbSouhaite, prix); //monnaie a utiliser par la suite
+
+		}else {
+			AnnulerTransaction(argent, "Argent insuffisant" , distributeur);
+			}
+		}
 		
 	private int lancerTransaction(Produit produitDemande, int argent, int nbSouhaite,int prix) {
+		System.out.println("Transaction acceptée !");
 		produitDemande.reduireQuantitee(nbSouhaite);
 		augmenterBenefice(prix);
 		int monnaieARendre = rendreMonnaie(argent, prix);
@@ -38,33 +34,24 @@ public class Machine {
 		}
 
 	private void AnnulerTransaction(int argent, String nomErreur, Machine distributeur) {
-		System.out.println(nomErreur);
-		System.out.println("Transaction annulée");
+		System.out.println(nomErreur+"\nTransaction annulée");
 		rendreMonnaie(argent, 0);
 		Main.Menu_client(distributeur);
 	}
 	
-	public boolean produitSuffisant(Produit produit, int nbSouhaite) {
-		int nombreDispo = produit.getNombre();
-		if ((nbSouhaite <= nombreDispo ) && (nbSouhaite >0)) {
-			return true;
-		}
-		return false;
-	}
-	
 	private int rendreMonnaie(int argent, int prix) {
-		return argent - prix;
+		int monnaieRendu = argent - prix;
+		System.out.println("Monnaie rendue :"+ monnaieRendu);
+		return monnaieRendu;
 	}
 	
 	private void augmenterBenefice(int prix) {
 		benefice = benefice + prix;
 	}
 
+
 	private boolean verifierArgentSuffisant(int argent, int prix) {
-		if (argent>=prix) {
-			return true;
-		}
-		return false;
+		return (argent>=prix);
 	}
 
 	public static Inventaire getInventaire() {

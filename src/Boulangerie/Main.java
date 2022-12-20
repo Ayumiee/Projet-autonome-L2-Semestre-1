@@ -55,7 +55,10 @@ public class Main {
         			
         				int argent = Integer.parseInt(inputOutput("Veuillez insérer la monnaie"));
         					distributeur.acheter(num_produit,argent,nb_souhaite,distributeur);
-        			}	
+        			}else {
+        				System.out.println("Nombre souhaité indisponible");
+        				Menu_client(distributeur);
+        			}
         		} 
         		else {
         			System.out.println("Il n'y en a plus ");
