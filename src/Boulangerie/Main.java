@@ -21,15 +21,15 @@ public class Main {
 	public static void Start(Machine distributeur) {
 		try {
 		int choixMenu = Integer.parseInt(inputOutput("0 - Achat \n1 - Maintenance"));
-		if (choixMenu==0) {
-			menuClient(distributeur); }
 		
-		else{
-			if (choixMenu==1) {
-				menuBoulanger(distributeur); }
-			else {
-				System.out.println("Numéro invalide");
-				Start(distributeur); }
+		switch (choixMenu) {
+		case 0:
+			menuClient(distributeur);
+		case 1:
+			menuBoulanger(distributeur);
+		default:
+			System.out.println("Numéro invalide");
+			Start(distributeur); 
 			}
 		
 		} catch(NumberFormatException entier) {
@@ -88,12 +88,11 @@ public class Main {
         
 	
 	public static void menuBoulanger(Machine distributeur) {
-		int action = Integer.parseInt(inputOutput("Que souhaitez-vous faire ?\n0 - Retirer un produit\n1 - Ajouter produit \n2 - Récupérer argent\n "));
+		int action = Integer.parseInt(inputOutput("Que souhaitez-vous faire ?\n0 - Retirer un produit\n1 - Ajouter produit \n2 - Récupérer argent\n404- Retour menu "));
 		switch(action) {
 		case 0:
 			System.out.println("Quel produit souhaitez-vous retirer ? Produits disponibles : \n");
 			distributeur.afficherProduit();
-			System.out.println("404 - Retour menu");
 			int numProduit=Integer.parseInt(inputOutput("Veuillez écrire le numéro correspondant"));
 			distributeur.retirerProduit(distributeur,numProduit);
 			Start(distributeur);
