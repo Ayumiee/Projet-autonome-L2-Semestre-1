@@ -36,7 +36,7 @@ public class Machine {
 	private void AnnulerTransaction(int argent, String nomErreur, Machine distributeur) {
 		System.out.println(nomErreur+"\nTransaction annulée");
 		rendreMonnaie(argent, 0);
-		Main.Menu_client(distributeur);
+		Main.menuClient(distributeur);
 	}
 	
 	private int rendreMonnaie(int argent, int prix) {
@@ -49,6 +49,26 @@ public class Machine {
 		benefice = benefice + prix;
 	}
 
+	public void afficherProduit() {
+		int nbProduit= inventaire.nbProduit;
+		int i=0;
+		while (i<nbProduit) {
+			Produit produit = inventaire.numeroChoisisVersProduit(i);
+			System.out.println(i+" - "+produit.getNom()+" : "+produit.getNombre()+" disponibles");
+			i=i+1;
+		}
+	}
+	
+	public void retirerProduit(Machine distributeur,int numProduit) {
+		int nbProduit=distributeur.getInventaire().getNbProduitTotaux();
+		
+		if ((numProduit>=0)&&(numProduit<nbProduit)) {
+			distributeur.inventaire.retirerInventaire(numProduit, null);
+		}else {
+			System.out.println("Numéro invalide");
+			Main.menuBoulanger(distributeur);
+		}
+	}
 
 	private boolean verifierArgentSuffisant(int argent, int prix) {
 		return (argent>=prix);

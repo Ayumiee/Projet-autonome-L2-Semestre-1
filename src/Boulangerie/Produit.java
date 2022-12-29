@@ -24,7 +24,7 @@ public class Produit {
 	}
 
 	public void reduireQuantitee(int nbSouhaite) {
-		this.nombre= nombre-nbSouhaite;
+		nombre= nombre-nbSouhaite;
 		if (nombre==0) {
 			//appeller le boulanger
 		}

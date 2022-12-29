@@ -1,7 +1,7 @@
 package Boulangerie;
 
 public class Inventaire {
-	private int nbProduit;
+	protected int nbProduit;
 	private static Produit[] tabProduit;
 	
 	public Inventaire() {
@@ -25,6 +25,7 @@ public class Inventaire {
 		tabProduit[3]= sucette;
 		System.out.println(tabProduit[3].getNom());
 		System.out.println(numeroChoisisVersProduit(0));
+		System.out.println(getTabProduit());
 		
 
 	}
@@ -37,10 +38,25 @@ public class Inventaire {
 		return nbProduit;
 	}
 
+	public void retirerInventaire(int emplacement,Produit produit) {
+		int i=emplacement;
+	
+		while (i<nbProduit-1) {
+		tabProduit[i]=tabProduit[i+1];
+		i++;
+		}
+		tabProduit[nbProduit]=null;
+		nbProduit--;
+	}
 
 	public static Produit[] getTabProduit() {
 		return tabProduit;
 	}
+
+	public int getNbProduit() {
+		return nbProduit;
+	}
+	
 	
 	
 
@@ -79,7 +95,6 @@ public class Inventaire {
 //		return baguette[0];
 //	}
 //	}
-	
 	
 	
 }

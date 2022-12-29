@@ -18,33 +18,37 @@ public class Main {
 		distributeur = new Machine();
 	}
 	
-	public static void Start() {
-		Machine distributeur = new Machine();
+	public static void Start(Machine distributeur) {
 		try {
 		int choixMenu = Integer.parseInt(inputOutput("0 - Achat \n1 - Maintenance"));
 		if (choixMenu==0) {
-			Menu_client(distributeur); }
+			menuClient(distributeur); }
 		
 		else{
 			if (choixMenu==1) {
-				Menu_boulanger(); }
+				menuBoulanger(distributeur); }
 			else {
 				System.out.println("Numéro invalide");
-				Start(); }
+				Start(distributeur); }
 			}
 		
 		} catch(NumberFormatException entier) {
 			System.out.println("Veuillez rentrer un chiffre");
-			Start();
+			Start(distributeur);
 			}
 		
 	}
 	
-	public static void Menu_client(Machine distributeur) {
+	public static void menuClient(Machine distributeur) {
         try {
-        	int num_produit = Integer.parseInt(inputOutput("Que-souhaitez-vous achetez : \n -> 0 - Baguette \n -> 1 - Pain au chocolat \n -> 2 - Croissant \n"));
-
-        	if (num_produit>=0 && num_produit<3) {
+        	System.out.println("Que souhaitez-vous achetez ?");
+        	distributeur.afficherProduit();
+        	System.out.println("404 - Retour menu");
+        	int num_produit = Integer.parseInt(inputOutput("Veuillez écrire le numéro correspondant"));
+        	if (num_produit==404) {
+        		Start(distributeur);
+        	}
+        	if (num_produit>=0 && num_produit<distributeur.getInventaire().getNbProduit()) {
         		Machine.getInventaire();
 				int nb_restant = Inventaire.getTabProduit()[num_produit].getNombre();
         		
@@ -55,24 +59,25 @@ public class Main {
         			
         				int argent = Integer.parseInt(inputOutput("Veuillez insérer la monnaie"));
         					distributeur.acheter(num_produit,argent,nb_souhaite,distributeur);
+        					Start(distributeur);
         			}else {
         				System.out.println("Nombre souhaité indisponible");
-        				Menu_client(distributeur);
+        				menuClient(distributeur);
         			}
         		} 
         		else {
         			System.out.println("Il n'y en a plus ");
-    				Menu_client(distributeur);
+    				menuClient(distributeur);
         		}
         	} 
         	else {
 				System.out.println("Numéro invalide");
-				Menu_client(distributeur);
+				menuClient(distributeur);
 				}	
 			} 
         catch (NumberFormatException e ) {
 			System.out.println("Veuillez rentrer un chiffre");
-			Menu_client(distributeur);
+			menuClient(distributeur);
 		}
 	}
         
@@ -82,9 +87,32 @@ public class Main {
         }
         
 	
-	public static void Menu_boulanger() {
-		int action = Integer.parseInt(inputOutput("Que souhaitez-vous faire ?\n1 - Ajouter produit \n2 - Récupérer argent\n "));
-		
+	public static void menuBoulanger(Machine distributeur) {
+		int action = Integer.parseInt(inputOutput("Que souhaitez-vous faire ?\n0 - Retirer un produit\n1 - Ajouter produit \n2 - Récupérer argent\n "));
+		switch(action) {
+		case 0:
+			System.out.println("Quel produit souhaitez-vous retirer ? Produits disponibles : \n");
+			distributeur.afficherProduit();
+			System.out.println("404 - Retour menu");
+			int numProduit=Integer.parseInt(inputOutput("Veuillez écrire le numéro correspondant"));
+			distributeur.retirerProduit(distributeur,numProduit);
+			Start(distributeur);
+			break;
+			
+		case 1:
+			break;
+			
+		case 2:
+			break;
+			
+		case 404: 
+			Start(distributeur);
+			
+		default:
+			System.out.println("Numéro invalide");
+			menuBoulanger(distributeur);
+			break;
+		}
 	}
         	
     private static String inputOutput(String message) {
@@ -102,11 +130,17 @@ public class Main {
     }
 	
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
+		System.out.println("Démarrage de la nouvelle machine ...");
+		Thread.sleep(1000);
+		System.out.println("Chargement...");
+		Thread.sleep(1000);
+		System.out.println("......");
+		Thread.sleep(1000);
 		System.out.println("Bienvenue !");
-		//new boulanger 
-		//Inventaire inventaire = distributeur.getInventaire();
-		Start();
+
+		Machine distributeur = new Machine();
+		Start(distributeur);
 	}
 
 }
