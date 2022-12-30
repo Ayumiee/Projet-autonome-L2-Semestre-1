@@ -14,14 +14,14 @@ public class Humain {
 		this.poche = new Produit[3];
 	}
 	
-	protected int gagnerArgent(int gain){
+	public int gagnerArgent(int gain){
 		argent = argent + gain;
-		return argent;
+		return gain;
 	}
 	
-	protected int perdreArgent(int perte) {
+	public int perdreArgent(int perte) {
 		argent = argent - perte;
-		return argent;
+		return perte;
 	}
 	
 

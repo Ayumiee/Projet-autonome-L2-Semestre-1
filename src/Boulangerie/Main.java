@@ -4,21 +4,19 @@ package Boulangerie;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Scanner;
 
-
-//methode cours int num_produit = Integer.parseInt(inputOutput("Que-souhaitez-vous achetez : \n -> 1 - Baguette \n -> 2 - Pain au chocolat \n -> 3 - Croissant \n"));
-//Scanner utilisateur = new Scanner(System.in);
-//System.out.println("Que-souhaitez-vous achetez : \n -> 1 - Baguette \n -> 2 - Pain au chocolat \n -> 3 - Croissant \n");
-//int num_produit = utilisateur.nextInt();
+import Personnages.Boulanger;
 
 public class Main {
 	private Machine distributeur;
+
 	
 	public Main() {
 		distributeur = new Machine();
 	}
 	
-	public static void Start(Machine distributeur) {
+	public static void Start(Machine distributeur) throws InterruptedException {
 		try {
 		int choixMenu = Integer.parseInt(inputOutput("0 - Achat \n1 - Maintenance"));
 		
@@ -39,7 +37,7 @@ public class Main {
 		
 	}
 	
-	public static void menuClient(Machine distributeur) {
+	public static void menuClient(Machine distributeur) throws InterruptedException {
         try {
         	System.out.println("Que souhaitez-vous achetez ?");
         	distributeur.afficherProduit();
@@ -81,28 +79,45 @@ public class Main {
 		}
 	}
         
-        
-	private int demanderProduitDesiree() {
-        	return Integer.parseInt(inputOutput("Que-souhaitez-vous achetez : \n -> 0 - Baguette \n -> 1 - Pain au chocolat \n -> 2 - Croissant \n"));
-        }
-        
 	
-	public static void menuBoulanger(Machine distributeur) {
-		int action = Integer.parseInt(inputOutput("Que souhaitez-vous faire ?\n0 - Retirer un produit\n1 - Ajouter produit \n2 - Récupérer argent\n404- Retour menu "));
+	public static void menuBoulanger(Machine distributeur) throws InterruptedException {
+		int action = Integer.parseInt(inputOutput("Que souhaitez-vous faire ?\n0 - Retirer un produit\n2 - Récupérer argent\n3 - Ajouter quantité\n404- Retour menu "));
 		switch(action) {
 		case 0:
 			System.out.println("Quel produit souhaitez-vous retirer ? Produits disponibles : \n");
 			distributeur.afficherProduit();
-			int numProduit=Integer.parseInt(inputOutput("Veuillez écrire le numéro correspondant"));
-			distributeur.retirerProduit(distributeur,numProduit);
+			int numProduitRetire=Integer.parseInt(inputOutput("Veuillez écrire le numéro correspondant"));
+			distributeur.retirerProduit(distributeur,numProduitRetire);
 			Start(distributeur);
-			break;
 			
-		case 1:
-			break;
+//		case 1:
+//			
+//			//BUG
+//			System.out.println("Quel produit souhaitez-vous ajouter ? Produits disponibles : \n");
+//			distributeur.afficherProduit();
+//			System.out.println("Veuillez entrez le nom du nouveau produit");
+//			Scanner lecteur = new Scanner(System.in);
+//			String nom = lecteur.next();
+//			System.out.println("Quelle est la quantitée disponible actuellement?");
+//			int nombre = lecteur.nextInt();
+//			System.out.println("Combien coûte ce nouveau produit?");
+//			int prix = lecteur.nextInt();
+//			distributeur.ajouterProduit(distributeur,nom,nombre,prix);
+//			Start(distributeur);
 			
 		case 2:
-			break;
+			System.out.println("Ouverture de la trappe....");
+			Thread.sleep(1000);
+			int benefice = distributeur.recupererArgent();
+			Start(distributeur);
+		
+		case 3:
+			System.out.println("Votre demande concerne quel produit ? Produits disponibles : \n");
+			distributeur.afficherProduit();
+			int numProduitAjout=Integer.parseInt(inputOutput("Veuillez écrire le numéro correspondant"));
+			int quantitee=Integer.parseInt(inputOutput("Quelle quantitée souhaitez vous ajouter ?"));
+			distributeur.augmenterQuantitee(distributeur,numProduitAjout,quantitee);
+			Start(distributeur);
 			
 		case 404: 
 			Start(distributeur);

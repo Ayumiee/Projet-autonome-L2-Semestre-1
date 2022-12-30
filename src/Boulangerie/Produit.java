@@ -25,10 +25,9 @@ public class Produit {
 
 	public void reduireQuantitee(int nbSouhaite) {
 		nombre= nombre-nbSouhaite;
-		if (nombre==0) {
-			//appeller le boulanger
-		}
-		
+	}
+	public void augmenterQuantitee(int nbSouhaite) {
+		nombre=nombre+nbSouhaite;
 	}
 
 
